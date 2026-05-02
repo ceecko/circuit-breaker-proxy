@@ -1,0 +1,22 @@
+{
+  "name": "@ceecko/circuit-breaker-proxy",
+  "version": "0.0.1",
+  "description": "Node.js proxy for clients with circuit breaker. Allows providing a set of clients and round-robin function calls against them with circuit breaker logic.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "nyc --reporter=html mocha"
+  },
+  "author": "ceecko",
+  "license": "MIT",
+  "dependencies": {
+    "cockatiel": "^3.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5",
+    "nyc": "^18.0.0",
+    "sinon": "^21.1.2"
+  }
+}
