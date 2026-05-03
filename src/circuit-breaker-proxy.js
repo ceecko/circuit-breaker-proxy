@@ -11,7 +11,7 @@ class ProxyWithCircuitBreaker {
    * @template T
    * @param {T[]} clients An array of client instances accepting callback in functions.
    * @param {(error: Error) => boolean} handleWhenCondition
-   * @param {import('cockatiel').ICircuitBreakerOptions} circuitBreakerOpts
+   * @param {() => import('cockatiel').ICircuitBreakerOptions} circuitBreakerOpts
    * @returns {ProxyWithCircuitBreaker & T}
    */
   static create(clients, handleWhenCondition, circuitBreakerOpts) {
@@ -21,13 +21,13 @@ class ProxyWithCircuitBreaker {
   /**
    * @param {any[]} clients An array of client instances accepting callback in functions.
    * @param {(error: Error) => boolean} handleWhenCondition
-   * @param {import('cockatiel').ICircuitBreakerOptions} circuitBreakerOpts
+   * @param {() => import('cockatiel').ICircuitBreakerOptions} circuitBreakerOpts
    * @returns 
    */
   constructor(clients, handleWhenCondition, circuitBreakerOpts) {
     const registry = clients.map(client => ({
       client,
-      breaker: circuitBreaker(handleWhen(handleWhenCondition), circuitBreakerOpts)
+      breaker: circuitBreaker(handleWhen(handleWhenCondition), circuitBreakerOpts())
     }))
 
     // Store everything in the WeakMap to avoid instance collisions
