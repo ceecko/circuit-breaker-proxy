@@ -12,10 +12,10 @@ If a client continuously fails to respond to function calls, it can be temporari
 A good example is with a `node-etcd` client across many different hosts where each host is expected to provide the same response:
 
 ```js
-const circuitBreakerProxy = require('@ceecko/circuit-breaker-proxy')
+const { ProxyWithCircuitBreaker } = require('@ceecko/circuit-breaker-proxy')
 const Etcd = require('node-etcd')
 
-const proxy = circuitBreakerProxy.create([
+const proxy = ProxyWithCircuitBreaker.create([
   new Etcd('host1.example.com'),
   new Etcd('host2.example.com'),
   new Etcd('host3.example.com'),
