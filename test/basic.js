@@ -1,7 +1,7 @@
 const assert = require('assert')
 const ProxyWithCircuitBreaker = require("../src/circuit-breaker-proxy")
 const sinon = require('sinon')
-const { ConsecutiveBreaker, retry } = require('cockatiel')
+const { ConsecutiveBreaker } = require('cockatiel')
 
 describe('ProxyWithCircuitBreaker', () => {
   let clientA, clientB, clientC, handleWhen, clients
