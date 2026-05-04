@@ -11,7 +11,7 @@ If a client continuously fails to respond to function calls, it can be temporari
 ## Example
 A good example is with a `node-etcd` client across many different hosts where each host is expected to provide the same response:
 
-```
+```js
 const circuitBreakerProxy = require('@ceecko/circuit-breaker-proxy')
 const Etcd = require('node-etcd')
 
@@ -26,8 +26,9 @@ const proxy = circuitBreakerProxy.create([
   // If it's non-network related error, return it straightaway
   return false
 }, () => ({
+    // If a client fails 3 times in a row, remove it for 10 seconds
     halfOpenAfter: 10000,
-    breaker: new ConsecutiveBreaker(3), // If a client fails 3 times in a row, remove it for 10 seconds
+    breaker: new ConsecutiveBreaker(3),
 }))
 
 proxy.get('key', (err, data) => {
